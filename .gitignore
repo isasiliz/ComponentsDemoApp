@@ -1,0 +1,15 @@
+# Xcode user data
+*.xcuserdata
+*.xcuserdatad
+*.xcuserstate
+
+# Build artifacts
+DerivedData/
+build/
+
+# Swift Package Manager
+.build/
+
+# macOS
+.DS_Store
+
