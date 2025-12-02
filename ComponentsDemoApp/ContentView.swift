@@ -10,20 +10,32 @@ import SwiftUIComponentsKit
 
 struct ContentView: View {
     var body: some View {
-        SwiftUIComponentsKit.PrimaryButton(title: "Presioná acá", action: {
+        ZStack {
+            LinearGradient.gelatoBackground
+                .ignoresSafeArea()
             
-            print("Presionaste el botón")
-        })
-        
-        
+            VStack {
+                Text("Welcome to Gelato App!")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .padding(40)
+                
+                VStack(spacing: 24) {
+                    
+                    PrimaryButton(title: "Ingresar", variant: .primary) {
+                        print("Login tapped")
+                    }
+                    
+                    PrimaryButton(title: "Crear cuenta", variant: .secondary) {
+                        print("Create account tapped")
+                    }
+                }
+            }
+            .padding()
+        }
     }
-    
-    
-    
-    
 }
-    
-    #Preview {
-        ContentView()
-    }
 
+#Preview {
+    ContentView()
+}
