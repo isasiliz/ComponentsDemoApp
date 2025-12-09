@@ -9,6 +9,10 @@ import SwiftUI
 import SwiftUIComponentsKit
 
 struct ContentView: View {
+    
+    let onLogin: () -> Void
+    let onCreateAccount: () -> Void
+    
     var body: some View {
         ZStack {
             LinearGradient.gelatoBackground
@@ -23,11 +27,11 @@ struct ContentView: View {
                 VStack(spacing: 24) {
                     
                     PrimaryButton(title: "Ingresar", variant: .primary) {
-                        print("Login tapped")
+                        onLogin()
                     }
                     
                     PrimaryButton(title: "Crear cuenta", variant: .secondary) {
-                        print("Create account tapped")
+                        onCreateAccount()
                     }
                 }
             }
@@ -37,5 +41,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(onLogin: {}, onCreateAccount: {})
 }

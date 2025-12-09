@@ -9,9 +9,19 @@ import SwiftUI
 import SwiftUIComponentsKit
 
 struct SettingView: View {
+    let onLogout: () -> Void
+    
     var body: some View {
-        Text("Setting")
+        VStack(spacing: 24) {
+            
+            PrimaryButton(title: "Cerrar sesion", variant: .danger) {
+                onLogout()
+            }
+        }
+        .padding()
     }
 }
 
-
+#Preview {
+    SettingView(onLogout: {})
+}
