@@ -60,7 +60,7 @@ struct CustomTextField: View {
                 )
                 .cornerRadius(8)
                 .focused($isFocused)
-                .onChange(of: isFocused) { newValue in
+                .onChange(of: isFocused) { _, newValue in
                     if newValue {
                         onAction?(.beginEditing)
                     } else {
@@ -68,7 +68,7 @@ struct CustomTextField: View {
                         onAction?(.resignFirstResponder)
                     }
                 }
-                .onChange(of: text) { newValue in
+                .onChange(of: text) { _, newValue in
                     hasEdited = true
                     
                     if let maxLength, newValue.count > maxLength {

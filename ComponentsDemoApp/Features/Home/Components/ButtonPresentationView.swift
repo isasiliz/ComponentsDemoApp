@@ -65,7 +65,7 @@ public struct ButtonPresentationView: View {
                     
                     Text(lastTappedButton)
                         .font(.body)
-                        .foregroundColor(.white.opacity(0.85))
+                        .foregroundColor(.black.opacity(0.85))
                         .multilineTextAlignment(.center)
                 }
                 .frame(maxWidth: .infinity)
