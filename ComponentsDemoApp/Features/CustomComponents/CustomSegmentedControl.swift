@@ -13,10 +13,9 @@ struct CustomSegmentedControl: View {
     let title: String
     let options: [String]
     @Binding var selectedOption: String
+    var selectedColor: Color = .gelatoPrimary
+    var backgroundColor: Color = Color.white.opacity(0.35)
     var onSelectionChanged: ((String) -> Void)? = nil
-    
-    private let selectedColor = Color.gelatoPrimary
-    private let backgroundColor = Color.white.opacity(0.35)
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {

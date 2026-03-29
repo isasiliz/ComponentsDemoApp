@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 enum CustomTextFieldAction {
     case beginEditing
@@ -24,6 +25,17 @@ struct CustomTextField: View {
     var minLengthMessage: String? = nil
     var maxLength: Int? = nil
     var maxLengthMessage: String? = nil
+    var enforcesMaxLength: Bool = true
+    var showsClearButton: Bool = false
+    
+    var keyboardType: UIKeyboardType = .default
+    var textInputAutocapitalization: TextInputAutocapitalization = .sentences
+    var autocorrectionDisabled: Bool = false
+    
+    var titleColor: Color = .primary
+    var fieldBackgroundColor: Color = .white
+    var normalBorderColor: Color = .gray.opacity(0.4)
+    var errorColor: Color = .red
     
     var onAction: ((CustomTextFieldAction) -> Void)? = nil
     
@@ -32,60 +44,78 @@ struct CustomTextField: View {
     
     private var validationMessage: String? {
         if let minLength, hasEdited, !text.isEmpty, text.count < minLength {
-            return minLengthMessage ?? "Ingresá al menos \(minLength) caracteres."
+            return minLengthMessage ?? "Please enter at least \(minLength) characters."
         }
         
-        if let maxLength, text.count > maxLength {
-            return maxLengthMessage ?? "Ingresá como máximo \(maxLength) caracteres."
+        if let maxLength, !enforcesMaxLength, text.count > maxLength {
+            return maxLengthMessage ?? "Please enter no more than \(maxLength) characters."
         }
         
         return nil
     }
     
-    private var borderColor: Color {
-        validationMessage == nil ? .gray.opacity(0.4) : .red
+    private var currentBorderColor: Color {
+        validationMessage == nil ? normalBorderColor : errorColor
     }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(title)
                 .font(.headline)
+                .foregroundColor(titleColor)
             
-            TextField(placeholder, text: $text)
-                .padding()
-                .background(Color.white)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(borderColor, lineWidth: 1)
-                )
-                .cornerRadius(8)
-                .focused($isFocused)
-                .onChange(of: isFocused) { _, newValue in
-                    if newValue {
-                        onAction?(.beginEditing)
-                    } else {
+            HStack(spacing: 8) {
+                TextField(placeholder, text: $text)
+                    .keyboardType(keyboardType)
+                    .textInputAutocapitalization(textInputAutocapitalization)
+                    .autocorrectionDisabled(autocorrectionDisabled)
+                    .focused($isFocused)
+                    .onChange(of: isFocused) { _, newValue in
+                        if newValue {
+                            onAction?(.beginEditing)
+                        } else {
+                            hasEdited = true
+                            onAction?(.resignFirstResponder)
+                        }
+                    }
+                    .onChange(of: text) { _, newValue in
                         hasEdited = true
-                        onAction?(.resignFirstResponder)
+                        
+                        if let maxLength, enforcesMaxLength, newValue.count > maxLength {
+                            text = String(newValue.prefix(maxLength))
+                        }
+                        
+                        onAction?(.textDidChange(text))
                     }
-                }
-                .onChange(of: text) { _, newValue in
-                    hasEdited = true
-                    
-                    if let maxLength, newValue.count > maxLength {
-                        text = String(newValue.prefix(maxLength))
+                    .onSubmit {
+                        hasEdited = true
+                        onAction?(.commit)
                     }
-                    
-                    onAction?(.textDidChange(text))
+                
+                if showsClearButton, !text.isEmpty {
+                    Button {
+                        text = ""
+                        hasEdited = true
+                        onAction?(.textDidChange(text))
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.secondary)
+                    }
+                    .buttonStyle(.plain)
                 }
-                .onSubmit {
-                    hasEdited = true
-                    onAction?(.commit)
-                }
+            }
+            .padding()
+            .background(fieldBackgroundColor)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(currentBorderColor, lineWidth: 1)
+            )
+            .cornerRadius(8)
             
             if let validationMessage {
                 Text(validationMessage)
                     .font(.caption)
-                    .foregroundColor(.red)
+                    .foregroundColor(errorColor)
             }
         }
         .padding(.horizontal)
@@ -106,9 +136,15 @@ private struct PreviewWrapper: View {
             placeholder: "Enter text",
             text: $text,
             minLength: 3,
-            minLengthMessage: "Galicia quiere más de tres",
+            minLengthMessage: "Galicia wants more than three characters",
             maxLength: 10,
-            maxLengthMessage: "Galicia prefiere texto más corto"
+            maxLengthMessage: "Galicia prefers shorter text",
+            enforcesMaxLength: true,
+            showsClearButton: true,
+            keyboardType: .emailAddress,
+            textInputAutocapitalization: .never,
+            autocorrectionDisabled: true,
+            titleColor: .primary
         ) { action in
             print(action)
         }

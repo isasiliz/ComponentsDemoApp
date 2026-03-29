@@ -13,9 +13,8 @@ struct CustomRadioButton: View {
     let title: String
     let options: [String]
     @Binding var selectedOption: String
+    var selectedColor: Color = .gelatoSecondary
     var onSelectionChanged: ((String) -> Void)? = nil
-    
-    private let selectedColor = Color.gelatoSecondary
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {

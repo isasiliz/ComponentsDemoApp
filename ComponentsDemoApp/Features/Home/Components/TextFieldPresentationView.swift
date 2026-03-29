@@ -8,7 +8,6 @@
 import SwiftUI
 import SwiftUIComponentsKit
 
-
 struct TextFieldPresentationView: View {
     @State private var inputText = ""
     @State private var eventMessage = "Start typing to see updates"
@@ -20,7 +19,7 @@ struct TextFieldPresentationView: View {
                     .font(.title3)
                     .fontWeight(.semibold)
                 
-                Text("This example shows a reusable text field with validation and interaction events.")
+                Text("This example shows a reusable text field with validation, interaction events and a clear button.")
                     .font(.body)
                     .multilineTextAlignment(.center)
                     .foregroundColor(.secondary)
@@ -33,7 +32,12 @@ struct TextFieldPresentationView: View {
                         minLength: 3,
                         minLengthMessage: "Please enter at least 3 characters",
                         maxLength: 10,
-                        maxLengthMessage: "Please keep it under 10 characters"
+                        maxLengthMessage: "Please keep it under 10 characters",
+                        enforcesMaxLength: true,
+                        showsClearButton: true,
+                        keyboardType: .default,
+                        textInputAutocapitalization: .never,
+                        autocorrectionDisabled: true
                     ) { action in
                         switch action {
                         case .beginEditing:
