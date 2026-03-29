@@ -8,28 +8,8 @@
 import SwiftUI
 import SwiftUIComponentsKit
 
-class Coordinator: ObservableObject {
-    @Published var path: [Screen] = []
-    
-    func push(_ screen: Screen) {
-        path.append(screen)
-    }
-    
-    func pop() {
-        guard !path.isEmpty else { return }
-        path.removeLast()
-    }
-}
-
-enum Screen: Hashable {
-    case buttons
-    case textFields
-    case segmentedControl
-    case radioButton
-}
-
 public struct HomeView: View {
-    @StateObject private var coordinator = Coordinator()
+    @StateObject private var coordinator = HomeCoordinator()
     
     public init() {}
     
@@ -80,7 +60,7 @@ public struct HomeView: View {
             .background(LinearGradient.gelatoBackground.ignoresSafeArea())
             .navigationTitle("Home")
             .navigationBarTitleDisplayMode(.inline)
-            .navigationDestination(for: Screen.self) { item in
+            .navigationDestination(for: HomeScreen.self) { item in
                 switch item {
                 case .buttons:
                     ButtonPresentationView()
