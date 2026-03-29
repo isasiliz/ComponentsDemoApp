@@ -9,38 +9,32 @@ import SwiftUI
 
 @main
 struct ComponentsDemoApp: App {
-    @AppStorage("isLoggedIn") var isLoggedIn: Bool = false
-    
-    @State var showSplash: Bool = true
-    
+    @AppStorage("isLoggedIn") private var isLoggedIn: Bool = false
+    @State private var showSplash: Bool = true
+
     var body: some Scene {
         WindowGroup {
             ZStack {
-                
-            }
-            if showSplash {
-                SplashView()
-                    .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                            withAnimation {
-                                showSplash = false
+                if showSplash {
+                    SplashView()
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                withAnimation {
+                                    showSplash = false
+                                }
                             }
                         }
-                    }
-            } else if isLoggedIn {
-                MainTabView(onLogout: {
-                    isLoggedIn = false
-                } )
-                   
-                
-                
-            } else {
-                ContentView(
-                    onLogin: {isLoggedIn = true},
-                    onCreateAccount: {isLoggedIn = true}
-                )
+                } else if isLoggedIn {
+                    MainTabView(onLogout: {
+                        isLoggedIn = false
+                    })
+                } else {
+                    ContentView(
+                        onLogin: { isLoggedIn = true },
+                        onCreateAccount: { isLoggedIn = true }
+                    )
+                }
             }
-            
         }
     }
 }
