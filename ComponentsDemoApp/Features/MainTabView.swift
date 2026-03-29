@@ -9,16 +9,14 @@ import SwiftUI
 import SwiftUIComponentsKit
 
 struct MainTabView: View {
-    
-    let onLogout: () -> Void
-    
+        
     var body: some View {
       TabView {
           HomeView()
               .tabItem {
                   Label("Home", systemImage: "house")
               }
-          SettingView(onLogout: onLogout)
+          SettingView()
               .tabItem {
                   Label("Setting", systemImage: "gear")
               }
@@ -27,6 +25,6 @@ struct MainTabView: View {
     }
 }
 #Preview {
-    MainTabView(onLogout: {})
+    MainTabView()
 }
 

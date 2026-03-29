@@ -8,7 +8,6 @@
 import SwiftUI
 import SwiftUIComponentsKit
 
-
 class Coordinator: ObservableObject {
     @Published var path: [Screen] = []
     
@@ -21,7 +20,6 @@ class Coordinator: ObservableObject {
     }
 }
 
-
 enum Screen: Hashable {
     case firstComponent
     case secondComponent
@@ -32,18 +30,55 @@ enum Screen: Hashable {
 public struct HomeView: View {
     @ObservedObject var coordinator = Coordinator()
     
+    public init() {}
+    
     public var body: some View {
         NavigationStack(path: $coordinator.path) {
-            VStack {
-                Button("Buttons") {
-                    coordinator.push(.firstComponent)
+            ScrollView {
+                VStack(spacing: 24) {
+                    headerView
+                    
+                    VStack(spacing: 16) {
+                        componentRow(
+                            title: "Buttons",
+                            subtitle: "Explore button variants and loading state",
+                            emoji: "🔘"
+                        ) {
+                            coordinator.push(.firstComponent)
+                        }
+                        
+                        componentRow(
+                            title: "TextFields",
+                            subtitle: "Reusable input with validation and events",
+                            emoji: "⌨️"
+                        ) {
+                            coordinator.push(.secondComponent)
+                        }
+                        
+                        componentRow(
+                            title: "Segmented Control",
+                            subtitle: "Switch between options with a tab-like control",
+                            emoji: "🗂️"
+                        ) {
+                            coordinator.push(.thirdComponent)
+                        }
+                        
+                        componentRow(
+                            title: "Radio Button",
+                            subtitle: "Select one option from a grouped list",
+                            emoji: "🔘"
+                        ) {
+                            coordinator.push(.fourthComponent)
+                        }
+                    }
+                    
+                    Spacer(minLength: 20)
                 }
-                Button("TextFields") {
-                    coordinator.push(.secondComponent)
-                }
-
+                .padding()
             }
-            .navigationTitle(Text("Home"))
+            .background(LinearGradient.gelatoBackground.ignoresSafeArea())
+            .navigationTitle("Home")
+            .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: Screen.self) { item in
                 switch item {
                 case .firstComponent:
@@ -51,11 +86,70 @@ public struct HomeView: View {
                 case .secondComponent:
                     TextFieldPresentationView()
                 case .thirdComponent:
-                    Text("third component")
+                    SegmentedControlPresentationView()
                 case .fourthComponent:
-                    Text("fourth component")
+                    RadioButtonPresentationView()
                 }
             }
         }
     }
+    
+    private var headerView: some View {
+        VStack(spacing: 12) {
+            Text("Gelato Components")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .multilineTextAlignment(.center)
+            
+            Text("Explore the reusable SwiftUI components included in the demo app.")
+                .font(.body)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+        }
+        .padding(.top, 8)
+    }
+    
+    private func componentRow(
+        title: String,
+        subtitle: String,
+        emoji: String,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button(action: action) {
+            HStack(spacing: 16) {
+                Text(emoji)
+                    .font(.system(size: 30))
+                    .frame(width: 52, height: 52)
+                    .background(Color.white.opacity(0.7))
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(title)
+                        .font(.headline)
+                        .foregroundColor(.primary)
+                    
+                    Text(subtitle)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.leading)
+                }
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.secondary)
+                    .font(.system(size: 14, weight: .semibold))
+            }
+            .padding(18)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Color.white.opacity(0.75))
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
+        }
+        .buttonStyle(.plain)
+    }
+}
+
+#Preview {
+    HomeView()
 }

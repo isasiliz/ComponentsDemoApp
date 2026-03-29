@@ -15,9 +15,7 @@ struct ComponentsDemoApp: App {
     var body: some Scene {
         WindowGroup {
             ZStack {
-                MainTabView(onLogout: {
-                    isLoggedIn = false
-                })
+                MainTabView()
             }
         }
     }
