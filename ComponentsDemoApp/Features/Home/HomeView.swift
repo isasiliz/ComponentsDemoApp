@@ -47,9 +47,9 @@ public struct HomeView: View {
             .navigationDestination(for: Screen.self) { item in
                 switch item {
                 case .firstComponent:
-                    ButtonComponentView()
+                    ButtonPresentationView()
                 case .secondComponent:
-                    Text("second component")
+                    TextFieldPresentationView()
                 case .thirdComponent:
                     Text("third component")
                 case .fourthComponent:

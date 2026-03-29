@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftUIComponentsKit
 
-public struct ButtonComponentView: View {
+public struct ButtonPresentationView: View {
     public var body: some View {
         VStack {
             Text("Button Component")
@@ -47,5 +47,5 @@ public struct ButtonComponentView: View {
 }
 
 #Preview {
-    ButtonComponentView()
+    ButtonPresentationView()
 }
