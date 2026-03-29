@@ -14,9 +14,9 @@ struct SettingView: View {
     var body: some View {
         VStack(spacing: 24) {
             
-            PrimaryButton(title: "Cerrar sesion", variant: .danger) {
-                onLogout()
-            }
+//            PrimaryButton(title: "Cerrar sesion", variant: .danger) {
+//                onLogout()
+//            }
         }
         .padding()
     }
