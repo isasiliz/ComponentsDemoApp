@@ -9,19 +9,20 @@ import SwiftUI
 import SwiftUIComponentsKit
 
 struct MainTabView: View {
-        
+    
     var body: some View {
-      TabView {
-          HomeView()
-              .tabItem {
-                  Label("Home", systemImage: "house")
-              }
-          SettingView()
-              .tabItem {
-                  Label("Setting", systemImage: "gear")
-              }
+        TabView {
+            HomeView()
+                .tabItem {
+                    Label("Home", systemImage: "house")
+                }
+            
+            AboutView()
+                .tabItem {
+                    Label("About Demo", systemImage: "info.circle")
+                }
         }
-      .tint(.gelatoSecondary)
+        .tint(.gelatoSecondary)
     }
 }
 #Preview {

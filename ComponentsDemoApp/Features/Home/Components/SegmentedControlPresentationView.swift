@@ -9,19 +9,19 @@ import SwiftUI
 import SwiftUIComponentsKit
 
 struct SegmentedControlPresentationView: View {
-    @State private var selectedSize = "Medium"
+    @State private var selectedCategory = "Chocolate"
     
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
-                Text("Segmented Control Presentation View")
+                Text("Segmented Control Demo")
                     .font(.title3)
                     .fontWeight(.semibold)
                 
                 CustomSegmentedControl(
-                    title: "Choose a size",
-                    options: ["Small", "Medium", "Large"],
-                    selectedOption: $selectedSize
+                    title: "Choose a flavor category",
+                    options: ["Chocolate", "Fruity", "Creamy"],
+                    selectedOption: $selectedCategory
                 ) { selectedValue in
                     print("Segment selected: \(selectedValue)")
                 }
@@ -37,32 +37,32 @@ struct SegmentedControlPresentationView: View {
     
     @ViewBuilder
     private var selectedContentView: some View {
-        switch selectedSize {
-        case "Small":
+        switch selectedCategory {
+        case "Chocolate":
             GelatoCardView(
-                emoji: "🍦",
-                title: "Small Gelato",
-                description: "Perfect for a quick sweet break. Ideal for one flavor.",
-                price: "$3.99",
+                emoji: "🍫",
+                title: "Chocolate Selection",
+                description: "Rich and intense flavors for chocolate lovers.",
+                price: "$5.99",
+                backgroundColor: Color.brown.opacity(0.18)
+            )
+            
+        case "Fruity":
+            GelatoCardView(
+                emoji: "🍓",
+                title: "Fruity Selection",
+                description: "Fresh and refreshing options with a fruity twist.",
+                price: "$4.99",
                 backgroundColor: Color.pink.opacity(0.15)
             )
             
-        case "Medium":
+        case "Creamy":
             GelatoCardView(
                 emoji: "🍨",
-                title: "Medium Gelato",
-                description: "A balanced choice with more room for creamy happiness.",
-                price: "$5.99",
-                backgroundColor: Color.orange.opacity(0.18)
-            )
-            
-        case "Large":
-            GelatoCardView(
-                emoji: "🍧",
-                title: "Large Gelato",
-                description: "Best option for big cravings and extra toppings.",
-                price: "$7.99",
-                backgroundColor: Color.blue.opacity(0.15)
+                title: "Creamy Selection",
+                description: "Smooth and classic flavors with a creamy texture.",
+                price: "$5.49",
+                backgroundColor: Color.orange.opacity(0.16)
             )
             
         default:

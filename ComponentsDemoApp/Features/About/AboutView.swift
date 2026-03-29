@@ -1,5 +1,5 @@
 //
-//  SettingView.swift
+//  AboutView.swift
 //  ComponentsDemoApp
 //
 //  Created by Liz Isasi on 01/12/2025.
@@ -8,13 +8,12 @@
 import SwiftUI
 import SwiftUIComponentsKit
 
-struct SettingView: View {
+struct AboutView: View {
     
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
                 headerView
-                
                 infoCard
             }
             .padding()
@@ -24,11 +23,11 @@ struct SettingView: View {
     
     private var headerView: some View {
         VStack(spacing: 12) {
-            Text("Settings")
+            Text("About")
                 .font(.largeTitle)
                 .fontWeight(.bold)
             
-            Text("About the demo application")
+            Text("Learn more about this demo app")
                 .font(.body)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
@@ -38,22 +37,22 @@ struct SettingView: View {
     
     private var infoCard: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("About this demo")
+            Text("Project overview")
                 .font(.headline)
             
-            Text("Gelato App is a demo application built to showcase reusable SwiftUI components created inside SwiftUIComponentsKit.")
+            Text("Gelato App is a demo built to showcase reusable SwiftUI components created in SwiftUIComponentsKit.")
                 .font(.body)
                 .foregroundColor(.secondary)
             
-            Text("The project focuses on modularity, visual consistency and component reuse through a simple and functional app experience.")
+            Text("The project highlights modularity, visual consistency and component reuse through a simple, interactive experience.")
                 .font(.body)
                 .foregroundColor(.secondary)
             
-            Text("This demo currently presents buttons, text fields, segmented controls and radio buttons through small interactive examples.")
+            Text("It currently includes buttons, text fields, segmented controls and radio buttons presented through small examples.")
                 .font(.body)
                 .foregroundColor(.secondary)
             
-            Text("Its purpose is to demonstrate how a Swift Package can help centralize UI elements and improve maintainability across a SwiftUI project.")
+            Text("The goal is to show how a Swift Package can centralize UI components and improve maintainability in a SwiftUI project.")
                 .font(.body)
                 .foregroundColor(.secondary)
         }
@@ -66,5 +65,5 @@ struct SettingView: View {
 }
 
 #Preview {
-    SettingView()
+    AboutView()
 }

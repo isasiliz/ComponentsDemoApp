@@ -16,7 +16,7 @@ public struct ButtonPresentationView: View {
     public var body: some View {
         ScrollView {
             VStack(spacing: 24) {
-                Text("Button Presentation View")
+                Text("Button Demo")
                     .font(.title3)
                     .fontWeight(.semibold)
                     .foregroundColor(.black)

@@ -14,7 +14,7 @@ struct RadioButtonPresentationView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
-                Text("Radio Button Presentation View")
+                Text("Radio Button Demo")
                     .font(.title3)
                     .fontWeight(.semibold)
                 

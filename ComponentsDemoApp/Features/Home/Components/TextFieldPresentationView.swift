@@ -16,7 +16,7 @@ struct TextFieldPresentationView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
-                Text("TextField Presentation View")
+                Text("TextField Demo")
                     .font(.title3)
                     .fontWeight(.semibold)
                 
