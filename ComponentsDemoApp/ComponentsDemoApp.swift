@@ -9,14 +9,9 @@ import SwiftUI
 
 @main
 struct ComponentsDemoApp: App {
-    @AppStorage("isLoggedIn") private var isLoggedIn: Bool = false
-    @State private var showSplash: Bool = true
-
     var body: some Scene {
         WindowGroup {
-            ZStack {
-                MainTabView()
-            }
+            MainTabView()
         }
     }
 }

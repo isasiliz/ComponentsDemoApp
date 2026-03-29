@@ -9,8 +9,10 @@ import SwiftUI
 import SwiftUIComponentsKit
 
 struct TextFieldPresentationView: View {
-    @State private var inputText = ""
-    @State private var eventMessage = "Start typing to see updates"
+    @State private var nickname = ""
+    @State private var email = ""
+    @State private var dni = ""
+    @State private var eventMessage = "No interaction yet"
     
     var body: some View {
         ScrollView {
@@ -19,7 +21,7 @@ struct TextFieldPresentationView: View {
                     .font(.title3)
                     .fontWeight(.semibold)
                 
-                Text("This example shows a reusable text field with validation, interaction events and a clear button.")
+                Text("This example shows reusable text fields with validation and different keyboard types.")
                     .font(.body)
                     .multilineTextAlignment(.center)
                     .foregroundColor(.secondary)
@@ -28,7 +30,7 @@ struct TextFieldPresentationView: View {
                     CustomTextField(
                         title: "Your nickname",
                         placeholder: "Enter text",
-                        text: $inputText,
+                        text: $nickname,
                         minLength: 3,
                         minLengthMessage: "Please enter at least 3 characters",
                         maxLength: 10,
@@ -41,49 +43,66 @@ struct TextFieldPresentationView: View {
                     ) { action in
                         switch action {
                         case .beginEditing:
-                            eventMessage = "User started editing"
-                            print("Begin Editing")
-                            
-                        case .textDidChange(let value):
-                            eventMessage = "Current value: \(value)"
-                            print("Text changed: \(value)")
-                            
+                            eventMessage = "Nickname editing started"
+                        case .textDidChange:
+                            eventMessage = "Nickname updated"
                         case .commit:
-                            eventMessage = "User submitted the text field"
-                            print("Commit")
-                            
+                            eventMessage = "Nickname submitted"
                         case .resignFirstResponder:
-                            eventMessage = "User finished editing"
-                            print("Resign First Responder")
+                            eventMessage = "Nickname editing ended"
                         }
                     }
                     
-                    VStack(spacing: 12) {
-                        Text("Live preview")
-                            .font(.headline)
-                        
-                        Text(inputText.isEmpty ? "No text yet" : inputText)
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundColor(inputText.isEmpty ? .secondary : .primary)
-                        
-                        Text(eventMessage)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                            .multilineTextAlignment(.center)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(24)
-                    .background(Color.pink.opacity(0.08))
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                    .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
+                    CustomTextField(
+                        title: "Email",
+                        placeholder: "Enter your email",
+                        text: $email,
+                        showsClearButton: true,
+                        keyboardType: .emailAddress,
+                        textInputAutocapitalization: .never,
+                        autocorrectionDisabled: true
+                    )
+                    
+                    CustomTextField(
+                        title: "DNI",
+                        placeholder: "Enter 8 digits",
+                        text: $dni,
+                        maxLength: 8,
+                        enforcesMaxLength: true,
+                        showsClearButton: true,
+                        keyboardType: .numberPad,
+                        textInputAutocapitalization: .never,
+                        autocorrectionDisabled: true
+                    )
                 }
+                
+                VStack(spacing: 12) {
+                    Text("Last interaction")
+                        .font(.headline)
+                    
+                    Text(eventMessage)
+                        .font(.body)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(24)
+                .background(Color.white.opacity(0.7))
+                .clipShape(RoundedRectangle(cornerRadius: 20))
                 
                 Spacer(minLength: 20)
             }
             .padding()
         }
         .background(LinearGradient.gelatoBackground.ignoresSafeArea())
+        .contentShape(Rectangle())
+        .onTapGesture {
+            hideKeyboard()
+        }
+    }
+    
+    private func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 

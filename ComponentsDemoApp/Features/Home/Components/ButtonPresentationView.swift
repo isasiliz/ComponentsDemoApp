@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftUIComponentsKit
 
 public struct ButtonPresentationView: View {
-    @State private var lastTappedButton = "No button tapped yet"
+    @State private var lastTappedButton = "No interaction yet"
     
     public init() {}
     
@@ -56,7 +56,7 @@ public struct ButtonPresentationView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .padding(24)
-                .background(Color.white.opacity(0.08))
+                .background(Color.white.opacity(0.7))
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 
                 SectionDivider()
@@ -76,11 +76,11 @@ public struct ButtonPresentationView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .padding(24)
-                .background(Color.white.opacity(0.08))
+                .background(Color.white.opacity(0.7))
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 
                 VStack(spacing: 12) {
-                    Text("Interaction feedback")
+                    Text("Last interaction")
                         .font(.headline)
                         .foregroundColor(.black)
                     
@@ -91,7 +91,7 @@ public struct ButtonPresentationView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .padding(24)
-                .background(Color.white.opacity(0.08))
+                .background(Color.white.opacity(0.7))
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 
                 Spacer(minLength: 20)

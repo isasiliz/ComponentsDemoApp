@@ -16,19 +16,20 @@ class Coordinator: ObservableObject {
     }
     
     func pop() {
+        guard !path.isEmpty else { return }
         path.removeLast()
     }
 }
 
 enum Screen: Hashable {
-    case firstComponent
-    case secondComponent
-    case thirdComponent
-    case fourthComponent
+    case buttons
+    case textFields
+    case segmentedControl
+    case radioButton
 }
 
 public struct HomeView: View {
-    @ObservedObject var coordinator = Coordinator()
+    @StateObject private var coordinator = Coordinator()
     
     public init() {}
     
@@ -44,7 +45,7 @@ public struct HomeView: View {
                             subtitle: "Explore button variants and loading state",
                             emoji: "🔘"
                         ) {
-                            coordinator.push(.firstComponent)
+                            coordinator.push(.buttons)
                         }
                         
                         componentRow(
@@ -52,7 +53,7 @@ public struct HomeView: View {
                             subtitle: "Reusable input with validation and events",
                             emoji: "⌨️"
                         ) {
-                            coordinator.push(.secondComponent)
+                            coordinator.push(.textFields)
                         }
                         
                         componentRow(
@@ -60,7 +61,7 @@ public struct HomeView: View {
                             subtitle: "Switch between options with a tab-like control",
                             emoji: "🗂️"
                         ) {
-                            coordinator.push(.thirdComponent)
+                            coordinator.push(.segmentedControl)
                         }
                         
                         componentRow(
@@ -68,7 +69,7 @@ public struct HomeView: View {
                             subtitle: "Select one option from a grouped list",
                             emoji: "🔘"
                         ) {
-                            coordinator.push(.fourthComponent)
+                            coordinator.push(.radioButton)
                         }
                     }
                     
@@ -81,13 +82,13 @@ public struct HomeView: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: Screen.self) { item in
                 switch item {
-                case .firstComponent:
+                case .buttons:
                     ButtonPresentationView()
-                case .secondComponent:
+                case .textFields:
                     TextFieldPresentationView()
-                case .thirdComponent:
+                case .segmentedControl:
                     SegmentedControlPresentationView()
-                case .fourthComponent:
+                case .radioButton:
                     RadioButtonPresentationView()
                 }
             }
