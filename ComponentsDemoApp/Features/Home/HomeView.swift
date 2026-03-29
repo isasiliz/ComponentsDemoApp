@@ -58,8 +58,7 @@ public struct HomeView: View {
                 .padding()
             }
             .background(LinearGradient.gelatoBackground.ignoresSafeArea())
-            .navigationTitle("Home")
-            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(.hidden, for: .navigationBar)
             .navigationDestination(for: HomeScreen.self) { item in
                 switch item {
                 case .buttons:

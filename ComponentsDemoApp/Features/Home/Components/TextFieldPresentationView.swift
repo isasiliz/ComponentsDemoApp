@@ -95,6 +95,7 @@ struct TextFieldPresentationView: View {
             .padding()
         }
         .background(LinearGradient.gelatoBackground.ignoresSafeArea())
+        .toolbarBackground(.hidden, for: .navigationBar)
         .contentShape(Rectangle())
         .onTapGesture {
             hideKeyboard()

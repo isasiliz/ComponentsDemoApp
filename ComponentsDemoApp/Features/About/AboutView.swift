@@ -19,6 +19,7 @@ struct AboutView: View {
             .padding()
         }
         .background(LinearGradient.gelatoBackground.ignoresSafeArea())
+        .toolbarBackground(.hidden, for: .navigationBar)
     }
     
     private var headerView: some View {

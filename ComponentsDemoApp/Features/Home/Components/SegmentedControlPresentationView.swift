@@ -33,6 +33,7 @@ struct SegmentedControlPresentationView: View {
             .padding()
         }
         .background(LinearGradient.gelatoBackground.ignoresSafeArea())
+        .toolbarBackground(.hidden, for: .navigationBar)
     }
     
     @ViewBuilder
