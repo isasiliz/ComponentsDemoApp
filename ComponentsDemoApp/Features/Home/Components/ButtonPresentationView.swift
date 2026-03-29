@@ -15,7 +15,7 @@ public struct ButtonPresentationView: View {
     
     public var body: some View {
         ScrollView {
-            VStack(spacing: 24) {
+            VStack(spacing: 20) {
                 Text("Button Demo")
                     .font(.title3)
                     .fontWeight(.semibold)
@@ -44,13 +44,34 @@ public struct ButtonPresentationView: View {
                     }
                 }
                 
+                SectionDivider()
+                
                 VStack(spacing: 16) {
                     Text("Loading state")
                         .font(.headline)
                         .foregroundColor(.black)
                     
                     PrimaryButton(title: "Loading Button", variant: .primary, isLoading: true) {
-                        
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                .padding(24)
+                .background(Color.white.opacity(0.08))
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+                
+                SectionDivider()
+                
+                VStack(spacing: 16) {
+                    Text("Disabled state")
+                        .font(.headline)
+                        .foregroundColor(.black)
+                    
+                    PrimaryButton(title: "Disabled Primary", variant: .primary, isDisabled: true) {
+                        lastTappedButton = "Disabled primary button tapped"
+                    }
+                    
+                    PrimaryButton(title: "Disabled Secondary", variant: .secondary, isDisabled: true) {
+                        lastTappedButton = "Disabled secondary button tapped"
                     }
                 }
                 .frame(maxWidth: .infinity)
