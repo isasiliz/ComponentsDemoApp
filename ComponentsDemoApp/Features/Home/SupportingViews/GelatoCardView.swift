@@ -11,8 +11,22 @@ struct GelatoCardView: View {
     let emoji: String
     let title: String
     let description: String
-    let price: String
     let backgroundColor: Color
+    let price: String?
+    
+    init(
+        emoji: String,
+        title: String,
+        description: String,
+        backgroundColor: Color,
+        price: String? = nil
+    ) {
+        self.emoji = emoji
+        self.title = title
+        self.description = description
+        self.backgroundColor = backgroundColor
+        self.price = price
+    }
     
     var body: some View {
         VStack(spacing: 16) {
@@ -28,10 +42,12 @@ struct GelatoCardView: View {
                 .multilineTextAlignment(.center)
                 .foregroundColor(.secondary)
             
-            Text(price)
-                .font(.title3)
-                .fontWeight(.semibold)
-                .padding(.top, 4)
+            if let price {
+                Text(price)
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .padding(.top, 4)
+            }
         }
         .frame(maxWidth: .infinity)
         .padding(24)
@@ -46,8 +62,8 @@ struct GelatoCardView: View {
         emoji: "🍦",
         title: "Small Gelato",
         description: "Perfect for a quick sweet break. Ideal for one flavor.",
-        price: "$3.99",
-        backgroundColor: Color.pink.opacity(0.15)
+        backgroundColor: Color.pink.opacity(0.15), 
+        price: "$3.99"
     )
     .padding()
 }

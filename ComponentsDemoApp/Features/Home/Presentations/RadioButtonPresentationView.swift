@@ -44,8 +44,8 @@ struct RadioButtonPresentationView: View {
                 emoji: "🍦",
                 title: "Cone",
                 description: "Classic option with a crunchy cone and your favorite gelato flavor.",
-                price: "$4.50",
-                backgroundColor: Color.orange.opacity(0.18)
+                backgroundColor: Color.orange.opacity(0.18),
+                price: "$6.500"
             )
             
         case "Cup":
@@ -53,8 +53,8 @@ struct RadioButtonPresentationView: View {
                 emoji: "🍨",
                 title: "Cup",
                 description: "A practical choice for enjoying your gelato comfortably anywhere.",
-                price: "$4.20",
-                backgroundColor: Color.pink.opacity(0.15)
+                backgroundColor: Color.pink.opacity(0.15),
+                price: "$8.000"
             )
             
         case "1/4 Kg":
@@ -62,8 +62,8 @@ struct RadioButtonPresentationView: View {
                 emoji: "🍧",
                 title: "1/4 Kg",
                 description: "Perfect for sharing or taking home with up to two flavors.",
-                price: "$8.90",
-                backgroundColor: Color.blue.opacity(0.15)
+                backgroundColor: Color.blue.opacity(0.15),
+                price: "$12.000"
             )
             
         default:

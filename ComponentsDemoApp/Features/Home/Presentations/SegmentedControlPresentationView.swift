@@ -44,7 +44,6 @@ struct SegmentedControlPresentationView: View {
                 emoji: "🍫",
                 title: "Chocolate Selection",
                 description: "Rich and intense flavors for chocolate lovers.",
-                price: "$5.99",
                 backgroundColor: Color.brown.opacity(0.18)
             )
             
@@ -53,7 +52,6 @@ struct SegmentedControlPresentationView: View {
                 emoji: "🍓",
                 title: "Fruity Selection",
                 description: "Fresh and refreshing options with a fruity twist.",
-                price: "$4.99",
                 backgroundColor: Color.pink.opacity(0.15)
             )
             
@@ -62,7 +60,6 @@ struct SegmentedControlPresentationView: View {
                 emoji: "🍨",
                 title: "Creamy Selection",
                 description: "Smooth and classic flavors with a creamy texture.",
-                price: "$5.49",
                 backgroundColor: Color.orange.opacity(0.16)
             )
             
